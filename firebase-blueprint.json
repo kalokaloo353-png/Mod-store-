@@ -1,0 +1,236 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile and account settings",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "The user's unique Firebase auth UID",
+          "maxLength": 128
+        },
+        "email": {
+          "type": "string",
+          "description": "User email address",
+          "maxLength": 256
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the user",
+          "maxLength": 80
+        },
+        "bio": {
+          "type": "string",
+          "description": "Short user bio or status",
+          "maxLength": 300
+        },
+        "role": {
+          "type": "string",
+          "description": "User membership tier",
+          "maxLength": 32
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO timestamp of user registration",
+          "maxLength": 64
+        }
+      },
+      "required": ["userId", "email", "displayName", "createdAt"]
+    },
+    "Mod": {
+      "title": "Mod",
+      "description": "Mod or APK listing item in Modstore",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Name of the mod / app",
+          "maxLength": 100
+        },
+        "summary": {
+          "type": "string",
+          "description": "One-line summary of the mod",
+          "maxLength": 200
+        },
+        "description": {
+          "type": "string",
+          "description": "Full description of features and usage",
+          "maxLength": 4000
+        },
+        "category": {
+          "type": "string",
+          "description": "Mod category e.g. Games, Apps, Tools, Media",
+          "maxLength": 50
+        },
+        "platform": {
+          "type": "string",
+          "description": "Target OS or platform (e.g. Android APK, Windows PC)",
+          "maxLength": 50
+        },
+        "packageName": {
+          "type": "string",
+          "description": "Application package name e.g. com.spotify.music.mod",
+          "maxLength": 120
+        },
+        "minAndroid": {
+          "type": "string",
+          "description": "Minimum operating system target e.g. Android 8.0+",
+          "maxLength": 50
+        },
+        "version": {
+          "type": "string",
+          "description": "Semantic version number",
+          "maxLength": 30
+        },
+        "apkFileName": {
+          "type": "string",
+          "description": "Name of uploaded APK or mod package file",
+          "maxLength": 200
+        },
+        "thumbnailUrl": {
+          "type": "string",
+          "description": "Thumbnail preview image URL or data URI",
+          "maxLength": 500000
+        },
+        "videoUrl": {
+          "type": "string",
+          "description": "Gameplay or preview video URL or data URI",
+          "maxLength": 500000
+        },
+        "modFeatures": {
+          "type": "string",
+          "description": "Unlocked mod features (e.g. Premium Unlocked, No Ads, Unlimited)",
+          "maxLength": 500
+        },
+        "authorId": {
+          "type": "string",
+          "description": "Author user ID",
+          "maxLength": 128
+        },
+        "authorName": {
+          "type": "string",
+          "description": "Display name of author",
+          "maxLength": 80
+        },
+        "downloadCount": {
+          "type": "number",
+          "description": "Number of times downloaded"
+        },
+        "likesCount": {
+          "type": "number",
+          "description": "Count of user likes"
+        },
+        "fileSizeBytes": {
+          "type": "number",
+          "description": "Package size in bytes"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp",
+          "maxLength": 64
+        }
+      },
+      "required": ["title", "summary", "category", "authorId", "authorName", "version"]
+    },
+    "Review": {
+      "title": "Review",
+      "description": "Mod review and rating",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Reviewer UID",
+          "maxLength": 128
+        },
+        "userName": {
+          "type": "string",
+          "description": "Reviewer display name",
+          "maxLength": 80
+        },
+        "rating": {
+          "type": "number",
+          "description": "Numeric rating 1 to 5"
+        },
+        "comment": {
+          "type": "string",
+          "description": "Review commentary",
+          "maxLength": 1000
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Review timestamp",
+          "maxLength": 64
+        }
+      },
+      "required": ["userId", "userName", "rating", "comment"]
+    },
+    "SavedMod": {
+      "title": "SavedMod",
+      "description": "Bookmarked mod reference",
+      "type": "object",
+      "properties": {
+        "modId": {
+          "type": "string",
+          "description": "ID of saved mod",
+          "maxLength": 128
+        },
+        "savedAt": {
+          "type": "string",
+          "description": "Timestamp of save",
+          "maxLength": 64
+        }
+      },
+      "required": ["modId", "savedAt"]
+    },
+    "InstalledMod": {
+      "title": "InstalledMod",
+      "description": "Locally installed mod state for user",
+      "type": "object",
+      "properties": {
+        "modId": {
+          "type": "string",
+          "description": "ID of installed mod",
+          "maxLength": 128
+        },
+        "version": {
+          "type": "string",
+          "description": "Installed version",
+          "maxLength": 30
+        },
+        "installedAt": {
+          "type": "string",
+          "description": "Install timestamp",
+          "maxLength": 64
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether mod is currently active"
+        }
+      },
+      "required": ["modId", "version", "installedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "#/entities/UserProfile",
+      "description": "Stores user profile and account details"
+    },
+    "/mods/{modId}": {
+      "schema": "#/entities/Mod",
+      "description": "Modstore catalog of published mods and utilities"
+    },
+    "/mods/{modId}/reviews/{reviewId}": {
+      "schema": "#/entities/Review",
+      "description": "User reviews and star ratings for individual mods"
+    },
+    "/users/{userId}/savedMods/{modId}": {
+      "schema": "#/entities/SavedMod",
+      "description": "User wishlist and saved bookmarks"
+    },
+    "/users/{userId}/installedMods/{modId}": {
+      "schema": "#/entities/InstalledMod",
+      "description": "Mods installed in user mod manager library"
+    }
+  }
+}

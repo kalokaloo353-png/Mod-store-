@@ -1,0 +1,6 @@
+{
+  "name": "Modstore",
+  "description": "High-performance mod store with smooth animations, community discovery, one-click mod installation, and Firebase authentication in an obsidian black aesthetic.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
