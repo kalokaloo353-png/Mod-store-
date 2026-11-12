@@ -74,7 +74,8 @@ service cloud.firestore {
         && incoming().title is string
         && incoming().title.size() <= 100
         && incoming().summary is string
-        && incoming().summary.size() <= 200;
+        && incoming().summary.size() <= 200
+        && (!('paymentUrl' in incoming()) || (incoming().paymentUrl is string && incoming().paymentUrl.size() <= 2000));
       allow update: if isSignedIn() && (
         isAdmin() ||
         (existing().authorId == request.auth.uid && incoming().authorId == request.auth.uid) ||

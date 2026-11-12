@@ -38,6 +38,9 @@ export const SubmitModView: React.FC = () => {
   const [videoMode, setVideoMode] = useState<'upload' | 'url'>('upload');
   const videoInputRef = useRef<HTMLInputElement>(null);
 
+  // Developer Payment / Donation Link state
+  const [paymentUrl, setPaymentUrl] = useState<string>('');
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
@@ -140,6 +143,7 @@ export const SubmitModView: React.FC = () => {
         apkFileName: apkFile.name,
         thumbnailUrl: resolvedThumbnail,
         videoUrl: videoUrl.trim() || undefined,
+        paymentUrl: paymentUrl.trim() || undefined,
         modFeatures: features.length ? features : ['Verified Mod', 'No Ads'],
         tags: tags.length ? tags : ['APK', 'Community'],
         verified: true,
@@ -456,6 +460,29 @@ export const SubmitModView: React.FC = () => {
               </div>
             )}
           </div>
+        </div>
+
+        {/* SECTION: DEVELOPER PAYMENT / DONATION LINK */}
+        <div className="p-4 rounded-xl border border-neutral-800 bg-neutral-950 space-y-2">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+            <label className="text-neutral-200 font-semibold flex items-center gap-1.5">
+              <span>Developer Payment / Donation Link</span>
+              <span className="text-neutral-500 font-normal">(PayPal, BuyMeACoffee, Ko-fi, etc.)</span>
+            </label>
+            <span className="text-[11px] font-mono text-emerald-400 font-medium">
+              Optional — leave empty if it's free
+            </span>
+          </div>
+          <input
+            type="url"
+            value={paymentUrl}
+            onChange={(e) => setPaymentUrl(e.target.value)}
+            placeholder="https://paypal.me/yourusername or https://buymeacoffee.com/yourhandle"
+            className="w-full h-9 px-3 bg-neutral-900 border border-neutral-800 rounded-lg text-white font-mono text-xs focus:outline-none focus:border-neutral-600"
+          />
+          <p className="text-[11px] text-neutral-500 leading-relaxed">
+            Specify an optional payment/donation link for users who wish to tip or support your work. If left blank, the APK download remains 100% free with no donation prompt.
+          </p>
         </div>
 
         {/* SECTION 4: MOD & APP METADATA */}

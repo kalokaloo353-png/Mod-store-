@@ -257,6 +257,36 @@ export const ModDetailDrawer: React.FC = () => {
                   </div>
                 </div>
               )}
+
+              {/* Optional Payment / Support Link Section */}
+              <div className="pt-3 border-t border-neutral-800/80 flex flex-wrap items-center justify-between gap-2 text-xs">
+                <div className="flex items-center gap-2 text-neutral-400">
+                  <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-950 text-emerald-400 border border-emerald-800/60 font-semibold">
+                    100% Free APK
+                  </span>
+                  <span className="text-neutral-400 text-[11px]">
+                    Optional payment link: leave it, it's free!
+                  </span>
+                </div>
+
+                {selectedMod.paymentUrl ? (
+                  <a
+                    href={selectedMod.paymentUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3.5 py-1.5 text-xs font-medium text-amber-300 bg-amber-950/60 border border-amber-800/60 hover:bg-amber-900/60 rounded-lg transition-colors flex items-center gap-1.5 shrink-0"
+                    title="Support Developer (Optional — leave it, it's free)"
+                  >
+                    <CssIcon name="sparkle" size={13} color="#f59e0b" />
+                    <span>Support Creator (Payment Link)</span>
+                    <span className="text-[10px] text-amber-400/80 font-mono">(Optional)</span>
+                  </a>
+                ) : (
+                  <span className="text-[11px] font-mono text-neutral-500">
+                    Direct Free Download
+                  </span>
+                )}
+              </div>
             </div>
 
             {/* Unlocked Mod Features Checklist */}

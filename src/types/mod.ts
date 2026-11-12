@@ -61,6 +61,7 @@ export interface ModItem {
   apkFileName: string; // e.g. "YouTube_ReVanced_v19.45.38.apk"
   thumbnailUrl: string; // High-res app icon or thumbnail
   videoUrl?: string; // Preview or gameplay video URL (MP4 or embed)
+  paymentUrl?: string; // Optional payment or donation link for the author
   safetyAudit?: AISafetyAudit; // Gemini AI Safety Verification Report
   changelog: ModChangelogEntry[];
   installCommand?: string;

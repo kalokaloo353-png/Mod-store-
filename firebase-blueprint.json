@@ -98,6 +98,11 @@
           "description": "Gameplay or preview video URL or data URI",
           "maxLength": 500000
         },
+        "paymentUrl": {
+          "type": "string",
+          "description": "Optional payment or donation URL for the author",
+          "maxLength": 2000
+        },
         "modFeatures": {
           "type": "string",
           "description": "Unlocked mod features (e.g. Premium Unlocked, No Ads, Unlimited)",
